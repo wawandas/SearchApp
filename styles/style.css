@@ -1,0 +1,117 @@
+html,
+body {
+    height: 100%;
+}
+
+#app {
+    -webkit-font-smoothing: antialiased;
+    color: #2c3e50;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    height: 100%;
+    padding-top: 100px;
+    text-align: left;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    display: block;
+    margin: 0 10px;
+}
+
+input {
+    border: 1px solid #ccc;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 44px;
+    outline: 0;
+    text-indent: 6px;
+}
+
+input.input-complete {
+    width: 100%;
+}
+
+input.input-date {}
+
+input:focus {
+    border-color: #00AEEF;
+}
+
+.control {
+    display: inline-block;
+    width: 300px;
+}
+
+.autocomplete-input {
+    display: inline-block;
+    position: relative;
+}
+
+.radius {
+    border-radius: 6px;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+form.search-tours {
+    display: inline-block;
+    background-color: #D3D3D4;
+    padding: 6px;
+}
+
+.submit-btn {
+    background-color: #00AEEF;
+    border-color: #00AEEF;
+    color: #fff;
+    font-size: 15px;
+    line-height: 44px;
+    padding: 0 20px;
+    vertical-align: top;
+}
+
+.title {
+    font-size: 12px;
+    left: 2px;
+    position: absolute;
+    top: 2px;
+}
+
+.input-group {
+    margin-right: 4px;
+}
+
+ul.tours-list {
+    border-radius: 0 0 3px 3px;
+    border: 1px solid #dbdbdb;
+    margin-top: 0px;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+}
+
+ul.tours-list li {
+    background: white;
+    border-bottom: 1px solid #eee;
+    color: #363636;
+    cursor: pointer;
+    margin: 0;
+    padding: 7px;
+    width: 100%;
+}
+
+ul.tours-list li.highlighted {
+    background: #00AEEF;
+    color: #fff;
+}
+
+ul.results-list {
+    margin: 0;
+}
+
+ul.results-list li {
+    margin: 0;
+}

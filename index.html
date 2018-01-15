@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>SearchApp</title>
+	<link rel="stylesheet" href="./styles/style.css">
+	<script src="./js/data.js"></script>
+	<script src="./js/libs/vue.js"></script>
+	<script src="./js/libs/vue-router.min.js"></script>
+	<script src="./js/components/search.component.js"></script>
+	<script src="./js/components/autocomplete.component.js"></script>
+	<script src="./js/components/results.component.js"></script>
+</head>
+<body>
+<!-- autocomplete-template -->	
+<script id="autocomplete-input-template" type="text/x-template">
+	<div class="input-group autocomplete-input">
+	    <label class="control has-icon has-icon-right">
+		<input v-model="keyword" class="input-complete is-large radius" 
+			placeholder="Where are you going?" 
+			@input="onInput($event.target.value)" 
+			@keyup.esc="isOpen = false" 
+			@blur="isOpen = false" 
+			@keydown.down="moveDown" 
+			@keydown.up="moveUp" 
+			@keydown.enter="select">
+	    </label>
+	    <ul v-show="isOpen" class="tours-list">
+			<li v-for="(tour, index) in fTours" 
+				:class="{ 'highlighted': index === highlightedPosition}" 
+				@mouseenter="highlightedPosition = index" 
+				@mousedown="select">
+				{{tour.title}}
+			</li>
+	    </ul>
+	</div>
+</script>
+<!-- search-template -->
+<script id="search-template" type="text/x-template">
+	<div>
+		<h3>Find your tour:</h3>
+		<form class="search-tours radius" @submit.prevent="">
+			<autocomplete-input :tours="tours"></autocomplete-input>
+			<input type="date" class="radius">
+			<button type="submit" class="submit-btn radius">Search</button>
+		</form>
+	</div>
+</script>
+<!-- result-template -->
+<script id="result-template" type="text/x-template">
+	<div>
+		<h3>Results:</h3>
+		<ul :selectedTour="selectedTour" class="results-list">
+			<li v-for="(value, key) in selectedTour">{{key}}:{{value}}</li>
+		</ul>
+	<div>
+</script>
+<div id="app">
+	<router-view></router-view>
+</div>
+<script src="./js/app.js"></script>	
+</body>
+</html>
