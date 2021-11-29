@@ -1,56 +1,61 @@
+<!-- @format -->
+
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <HelloWorld />
-    </v-main>
+    <v-layout justify-center>
+      <v-flex xs12 sm10 md8 lg6>
+        <SearchBar @submit="onSubmit" :isLoading="isLoading" />
+        <SearchResults v-show="items.length" :items="items" />
+      </v-flex>
+    </v-layout>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
+import SearchBar from "./components/SearchBar";
+import SearchResults from "./components/SearchResults";
+import { getSearchResults } from "./services/index";
 
 export default {
   name: "App",
 
   components: {
-    HelloWorld,
+    SearchBar,
+    SearchResults,
   },
 
   data: () => ({
-    //
+    isLoading: false,
+    items: [],
   }),
+
+  methods: {
+    async onSubmit(keyword) {
+      this.isLoading = true;
+      try {
+        const {
+          data: { items = [] },
+        } = await getSearchResults({ keyword });
+
+        this.items = items;
+      } catch (e) {
+        console.error(e);
+      } finally {
+        this.isLoading = false;
+      }
+    },
+  },
 };
 </script>
+<style>
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
+  margin: -12px;
+}
+
+.v-application--wrap {
+  background-color: #0f2741;
+}
+</style>

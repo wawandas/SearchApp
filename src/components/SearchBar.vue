@@ -1,26 +1,35 @@
 <!-- @format -->
 
 <template>
-  <div class="pos-relative searchApp__container">
-    <input
+  <div class="d-flex mt-5">
+    <v-text-field
       v-model="searchTerm"
-      class="searchApp__input"
       placeholder="Search for statistics"
-      type="text"
-    />
-    <button
-      type="button"
-      class="button button--primary searchApp__submitButton"
+      solo
+      dense
+      required
+    ></v-text-field>
+    <v-btn
+      class="submit-btn"
+      depressed
+      color="primary"
+      :loading="isLoading"
+      :disabled="isLoading"
+      @click="() => $emit('submit', searchTerm)"
+      >Search</v-btn
     >
-      Search
-    </button>
   </div>
 </template>
 
 <script>
 export default {
   name: "SearchBar",
-  props: {},
+  props: {
+    isLoading: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       searchTerm: "statista",
@@ -29,5 +38,14 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+.d-flex {
+  position: relative;
+}
+
+.submit-btn {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+}
+</style>

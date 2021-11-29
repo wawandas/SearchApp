@@ -2,7 +2,17 @@
 
 <template>
   <section class="searchApp__results">
-    <div class="panelCard padding-all-20">No Results</div>
+    <v-card class="mx-auto">
+      <v-subheader>total amount of items: ({{ items.length }})</v-subheader>
+      <v-list-item v-for="item in items" three-line :key="item.identifier">
+        <v-list-item-content>
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+          <v-list-item-subtitle>
+            {{ item.description }}
+          </v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+    </v-card>
   </section>
 </template>
 
@@ -10,15 +20,12 @@
 export default {
   name: "SearchResults",
   props: {
-    msg: String,
+    items: {
+      type: Array,
+      required: true,
+    },
   },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.searchApp__results {
-  max-width: 600px;
-  margin: 20px auto;
-}
-</style>
+<style scoped></style>
