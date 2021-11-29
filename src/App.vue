@@ -30,18 +30,7 @@ export default {
   margin-top: 60px;
 }
 
-.searchApp__container {
-  max-width: 600px;
-  margin: 20px auto;
-}
-.searchApp__submitButton {
-  position: absolute;
-  margin: 0;
-  right: 0;
-  top: 0;
-}
-.searchApp__results {
-  max-width: 600px;
-  margin: 20px auto;
+body {
+  background-color: #0f2741;
 }
 </style>
