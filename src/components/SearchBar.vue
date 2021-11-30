@@ -1,35 +1,28 @@
 <!-- @format -->
 
 <template>
-  <div class="d-flex mt-5">
-    <v-text-field
+  <form class="searchbox-wrap">
+    <input
       v-model="searchTerm"
+      class="search__input"
+      type="search"
+      autocomplete="off"
       placeholder="Search for statistics"
-      solo
-      dense
       required
-    ></v-text-field>
-    <v-btn
-      class="submit-btn"
-      depressed
-      color="primary"
-      :loading="isLoading"
-      :disabled="isLoading"
-      @click="() => $emit('submit', searchTerm)"
-      >Search</v-btn
+    />
+    <button
+      class="search__submit"
+      type="submit"
+      @click.prevent="() => $emit('submit', searchTerm)"
     >
-  </div>
+      Search
+    </button>
+  </form>
 </template>
 
 <script>
 export default {
   name: "SearchBar",
-  props: {
-    isLoading: {
-      type: Boolean,
-      default: false,
-    },
-  },
   data() {
     return {
       searchTerm: "statista",
@@ -39,13 +32,36 @@ export default {
 </script>
 
 <style scoped>
-.d-flex {
+.searchbox-wrap {
+  display: block;
   position: relative;
+  margin: 32px auto;
+  max-width: 300px;
 }
 
-.submit-btn {
+.search__input {
+  width: 100%;
+  background: none;
+  border-radius: 16px;
+  font-size: 16px;
+  border: 1px solid #0b85e5;
+  line-height: 36px;
+  text-indent: 16px;
+  color: #6a7c92;
+}
+
+.search__submit {
+  background-color: #0077d5;
+  font-size: 16px;
+  color: #fff;
   position: absolute;
+  right: 0;
+  line-height: 36px;
   top: 1px;
-  right: 1px;
+  padding: 0 16px;
+  margin: 0;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
 }
 </style>
