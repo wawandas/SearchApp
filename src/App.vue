@@ -77,7 +77,29 @@
       <section class="responsiveSection">
         <div class="responsiveSection__grid">
           <SearchBar @submit="onSubmit" />
-          <SearchResults v-show="items.length" :items="items" />
+          <SearchResults
+            v-if="displayedItems.length"
+            :items="displayedItems"
+            :totalAmountItems="items.length"
+          />
+          <div v-if="displayedItems.length" class="button-wrapper">
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-secondary"
+              v-if="page != 1"
+              @click="page--"
+            >
+              prev
+            </button>
+            <button
+              type="button"
+              @click="page++"
+              v-if="page < pages.length"
+              class="btn btn-sm btn-outline-secondary"
+            >
+              next
+            </button>
+          </div>
         </div>
       </section>
     </main>
@@ -150,7 +172,16 @@ export default {
   data: () => ({
     isLoading: false,
     items: [],
+    page: 1,
+    perPage: 9,
+    pages: [],
   }),
+
+  computed: {
+    displayedItems() {
+      return this.paginate(this.items);
+    },
+  },
 
   methods: {
     async onSubmit(keyword) {
@@ -167,10 +198,34 @@ export default {
         this.isLoading = false;
       }
     },
+    setPages() {
+      let numberOfPages = Math.ceil(this.items.length / this.perPage);
+      for (let index = 1; index <= numberOfPages; index++) {
+        this.pages.push(index);
+      }
+    },
+    paginate(items) {
+      let page = this.page;
+      let perPage = this.perPage;
+      let from = page * perPage - perPage;
+      let to = page * perPage;
+      return items.slice(from, to);
+    },
+  },
+  watch: {
+    items() {
+      this.setPages();
+    },
   },
 };
 </script>
 <style>
 @import "https://de.statista.com/css/base.css";
 @import "https://de.statista.com/css/main.css";
+
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+}
 </style>

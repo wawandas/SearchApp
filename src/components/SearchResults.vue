@@ -2,7 +2,9 @@
 
 <template>
   <section class="searchApp__results">
-    total amount of items: ({{ items.length }})
+    total amount of items: ({{ totalAmountItems }})
+    <br />
+    items per page: ({{ items.length }})
     <ul class="list list--blank">
       <li
         v-for="item in items"
@@ -40,6 +42,10 @@ export default {
   props: {
     items: {
       type: Array,
+      required: true,
+    },
+    totalAmountItems: {
+      type: Number,
       required: true,
     },
   },

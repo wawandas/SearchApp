@@ -44,6 +44,7 @@ export default {
   background: none;
   border-radius: 16px;
   font-size: 16px;
+  padding: 0;
   border: 1px solid #0b85e5;
   line-height: 36px;
   text-indent: 16px;
